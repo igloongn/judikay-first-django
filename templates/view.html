@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<title>View Data</title>
+</head>
+<body>
+    <center><h1>View all the Data</h1></center>
+    <center><h2><a href="{% url 'createform' %}">Wanna Create</a></h2></center>
+
+    <br>
+    <br>
+    <br>
+    <div class="container text-center">
+        <table class="table table-light">
+            <thead class="thead-light">
+                <tr>
+                    <th>SN</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Human Race</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data  %}
+                <tr>
+                        <td>{{item.id}}</td>
+                        <td>{{item.firstname}}</td>
+                        <td>{{item.lastname}}</td>
+                        <td>{{item.humanrace}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+</html>
