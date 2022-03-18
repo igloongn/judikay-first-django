@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -17,6 +18,7 @@
     <br>
     <br>
     <br>
+    {% if data_count >= 1 %}
     <div class="container text-center">
         <table class="table table-light">
             <thead class="thead-light">
@@ -24,18 +26,38 @@
                     <th>SN</th>
                     <th>Firstname</th>
                     <th>Lastname</th>
+                    <th>View</th>
+                    <th>Update</th>
+                    <th>Delete</th>
                     <th>Human Race</th>
                 </tr>
             </thead>
             <tbody>
+                
                 {% for item in data  %}
                 <tr>
-                        <td>{{item.id}}</td>
-                        <td>{{item.firstname}}</td>
-                        <td>{{item.lastname}}</td>
-                        <td>{{item.humanrace}}</td>
-                </tr>
-                {% endfor %}
+                    <td>{{item.id}}</td>
+                    <td>{{item.firstname}}</td>
+                    <td>{{item.lastname}}</td>
+
+                    <td>
+                        <a href="{% url 'single_data' item.id %}"><button type="submit" class="btn btn-primary">View Post</button></a>
+                    </td>
+                    <td>
+                        <a href=""><button type="submit" class="btn btn-warning">Update</button></a>
+                    </td>
+                    <td>
+                        <a href="{% url 'delete_data' item.id %}"><button type="submit" class="btn btn-danger">Delete</button></a>
+                    </td>
+
+                    <td>{{item.humanrace}}</td>
+            </tr>
+            {% endfor %}
+
+                {% else %}
+                    <center><img src="{% static 'images/images.png' %}" width="50%" alt=""></center>
+                {% endif %}
+                    
             </tbody>
         </table>
     </div>

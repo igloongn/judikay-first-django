@@ -1,5 +1,5 @@
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from first.models import FirstModel
 
 
@@ -35,9 +35,38 @@ def view_data(request):
     # p={}
     # query=FirstModel.objects.filter(firstname__contains='a')
     query=FirstModel.objects.all()
+    query_count=query.count()
+    print(query_count)
     p={
-        'data':query
+        'data':query,
+        'data_count':query_count,
     }
     return render(request, 'view.html', p)
+
+# This is to view Single Data
+def single_data(request, ab):
+    query=FirstModel.objects.get(id=ab)
+
+    p={
+        'url_params':ab,
+        'data':query,
+    }
+    return render(request, 'single_data.html', p)
     
+def update_data(request, ab):
+    if request.method == "POST":
+        product = get_object_or_404(FirstModel, id=ab)
+        product.model_name = request.POST['model_name']
+        product.save()
+        return redirect('listing')
+
+    p={
+
+    }
+    return render(request, 'update_data.html', p)
     
+def delete_data(request , ab):
+    query = FirstModel.objects.get(id = ab)
+    query.delete()
+    return redirect('viewdata')
+
